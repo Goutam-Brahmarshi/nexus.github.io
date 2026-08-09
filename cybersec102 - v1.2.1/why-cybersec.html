@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOUTAM // WHY CYBERSECURITY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { 
+                extend: { 
+                    colors: { bgDark: '#0A0E17', termGreen: '#00FF66', cyberBlue: '#00F0FF', exploitRed: '#FF003C' }, 
+                    fontFamily: { mono: ['"Share Tech Mono"', '"JetBrains Mono"', 'monospace'], sans: ['"Inter"', 'sans-serif'] } 
+                } 
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Share+Tech+Mono&family=JetBrains+Mono:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/nexus.css">
+
+    <style>
+        /* SOC Terminal Scrollbar */
+        .soc-feed::-webkit-scrollbar { width: 4px; }
+        .soc-feed::-webkit-scrollbar-track { background: transparent; }
+        .soc-feed::-webkit-scrollbar-thumb { background: #FF003C; border-radius: 4px; }
+        
+        /* Threat Card Hover Glows */
+        .threat-card { transition: all 0.3s ease; }
+        .threat-card:hover { transform: translateY(-4px); }
+        .threat-red:hover { box-shadow: 0 10px 30px -10px rgba(255, 0, 60, 0.4); border-color: rgba(255, 0, 60, 0.6); }
+        .threat-blue:hover { box-shadow: 0 10px 30px -10px rgba(0, 240, 255, 0.4); border-color: rgba(0, 240, 255, 0.6); }
+        .threat-green:hover { box-shadow: 0 10px 30px -10px rgba(0, 255, 102, 0.4); border-color: rgba(0, 255, 102, 0.6); }
+
+        /* Log Entry Animation */
+        @keyframes slideInLog {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .log-entry { animation: slideInLog 0.2s ease-out forwards; }
+    </style>
+</head>
+<body class="bg-bgDark text-gray-200 font-sans min-h-screen overflow-x-hidden selection:bg-termGreen selection:text-black relative">
+    
+    <div id="loader-root"></div>
+    <div class="crt-overlay fixed inset-0 z-50 pointer-events-none"></div>
+    <canvas id="particle-canvas" class="fixed inset-0 z-0 pointer-events-none"></canvas>
+    <div id="brand-root"></div>
+    <div id="navbar-root"></div>
+
+    <main class="relative z-10 pt-28 pb-20 px-4 max-w-7xl mx-auto min-h-screen">
+        
+        <!-- Header -->
+        <div class="w-full text-center sm:text-left mb-6 flex flex-col sm:flex-row sm:items-end justify-between border-b border-gray-800 pb-4 gap-4">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-exploitRed/30 bg-exploitRed/5 text-exploitRed font-mono text-xs tracking-widest uppercase mb-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-exploitRed animate-pulse"></span>
+                    SECTOR_ANALYSIS // THREAT_LANDSCAPE
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-mono font-bold tracking-tight text-white">
+                    <span id="cypher-heading" class="glow-blue" data-text="THE DIGITAL BATTLEFIELD">0x00000000000</span>
+                </h1>
+            </div>
+            <div class="font-mono text-xs text-gray-500">[SECTOR: <span class="text-exploitRed">CRITICAL_INFRASTRUCTURE</span>]</div>
+        </div>
+
+        <!-- Telemetry Status Bar (Original Stats Re-imagined) -->
+        <div class="w-full flex flex-col md:flex-row gap-4 mb-8">
+            <div class="flex-1 bg-black/60 border border-gray-800 rounded-lg p-3 flex items-center justify-between font-mono text-xs">
+                <span class="text-gray-500">ATTACK_FREQUENCY:</span>
+                <span class="text-exploitRed font-bold drop-shadow-[0_0_5px_rgba(255,0,60,0.8)]">1 EVERY 39s</span>
+            </div>
+            <div class="flex-1 bg-black/60 border border-gray-800 rounded-lg p-3 flex items-center justify-between font-mono text-xs">
+                <span class="text-gray-500">TALENT_DEFICIT:</span>
+                <span class="text-cyberBlue font-bold drop-shadow-[0_0_5px_rgba(0,240,255,0.8)]">3.5M+ GLOBALLY</span>
+            </div>
+            <div class="flex-1 bg-black/60 border border-gray-800 rounded-lg p-3 flex items-center justify-between font-mono text-xs">
+                <span class="text-gray-500">ASYMMETRIC_ADVANTAGE:</span>
+                <span class="text-termGreen font-bold drop-shadow-[0_0_5px_rgba(0,255,102,0.8)]">100% ROOT</span>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- LEFT COLUMN: The Mission & Stakes -->
+            <div class="lg:col-span-7 space-y-6 flex flex-col">
+                
+                <!-- The Mission Block -->
+                <div class="glass-terminal rounded-xl p-6 md:p-8 border-l-4 border-l-termGreen relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <svg class="w-24 h-24 text-termGreen" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-mono font-bold text-white mb-4 uppercase tracking-widest flex items-center gap-3">
+                        <span class="w-3 h-3 bg-termGreen rounded-sm inline-block shadow-[0_0_8px_rgba(0,255,102,0.8)]"></span>
+                        The Core Directive
+                    </h2>
+                    <p class="text-gray-300 font-sans leading-relaxed sm:text-lg mb-4">
+                        The digital perimeter is dead. Firewalls and antivirus software are merely speed bumps for advanced adversaries. 
+                    </p>
+                    <p class="text-gray-400 font-sans leading-relaxed text-sm">
+                        In modern asymmetrical warfare, the defender has to be right 100% of the time. The attacker only needs to be right <span class="text-white font-bold">once</span>. The only proven way to engineer a secure network is to know exactly how to shatter it. We don't just defend; we infiltrate, we emulate, and we fortify.
+                    </p>
+                </div>
+
+                <!-- Global Stakes Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    
+                    <!-- Threat 1: Ransomware -->
+                    <div class="bg-black/80 border border-gray-800 rounded-xl p-5 threat-card threat-red relative overflow-hidden">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="p-2 bg-exploitRed/10 rounded-lg text-exploitRed">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                            </div>
+                            <span class="font-mono text-xs text-exploitRed bg-exploitRed/10 px-2 py-0.5 rounded border border-exploitRed/30">SEVERITY: CRITICAL</span>
+                        </div>
+                        <h3 class="text-white font-mono font-bold text-lg mb-1">RANSOMWARE</h3>
+                        <p class="text-gray-400 text-xs font-sans leading-relaxed">Automated encryption payloads crippling enterprise infrastructure and holding critical data hostage.</p>
+                    </div>
+
+                    <!-- Threat 2: APTs -->
+                    <div class="bg-black/80 border border-gray-800 rounded-xl p-5 threat-card threat-blue relative overflow-hidden">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="p-2 bg-cyberBlue/10 rounded-lg text-cyberBlue">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                            </div>
+                            <span class="font-mono text-xs text-cyberBlue bg-cyberBlue/10 px-2 py-0.5 rounded border border-cyberBlue/30">SEVERITY: HIGH</span>
+                        </div>
+                        <h3 class="text-white font-mono font-bold text-lg mb-1">STATE-SPONSORED APTs</h3>
+                        <p class="text-gray-400 text-xs font-sans leading-relaxed">Advanced Persistent Threats maintaining covert access to grids for months before executing attacks.</p>
+                    </div>
+
+                    <!-- Threat 3: IoT Botnets -->
+                    <div class="bg-black/80 border border-gray-800 rounded-xl p-5 threat-card threat-green sm:col-span-2 relative overflow-hidden">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="p-2 bg-termGreen/10 rounded-lg text-termGreen">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path></svg>
+                            </div>
+                            <span class="font-mono text-xs text-termGreen bg-termGreen/10 px-2 py-0.5 rounded border border-termGreen/30">SEVERITY: ESCALATING</span>
+                        </div>
+                        <h3 class="text-white font-mono font-bold text-lg mb-1">WEAPONIZED IoT BOTNETS</h3>
+                        <p class="text-gray-400 text-xs font-sans leading-relaxed">Millions of unsecured hardware components hijacked to launch devastating distributed denial-of-service (DDoS) campaigns on command.</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Live SOC Feed -->
+            <div class="lg:col-span-5 h-[500px] lg:h-[600px] flex flex-col bg-black/90 border border-gray-800 rounded-xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.8)] relative">
+                
+                <!-- Terminal Header -->
+                <div class="bg-gray-900 border-b border-gray-800 px-4 py-3 flex items-center justify-between z-10">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-exploitRed animate-ping"></span>
+                        <span class="font-mono text-xs font-bold text-gray-300 tracking-wider">LIVE_SOC_MONITOR // INTRUSION_DETECTION</span>
+                    </div>
+                    <div class="flex gap-1.5">
+                        <div class="w-3 h-3 rounded-full bg-gray-600"></div>
+                        <div class="w-3 h-3 rounded-full bg-gray-600"></div>
+                        <div class="w-3 h-3 rounded-full bg-exploitRed"></div>
+                    </div>
+                </div>
+
+                <!-- Scrolling Feed Body -->
+                <div id="soc-feed-container" class="flex-1 p-4 font-mono text-[10px] sm:text-xs overflow-y-auto soc-feed flex flex-col gap-1 relative z-0">
+                    <div class="text-gray-500 mb-2">>> INTRUSION DETECTION SYSTEM INITIATED...</div>
+                    <div class="text-gray-500 mb-4">>> LISTENING ON ALL INTERFACES...</div>
+                    <!-- JS will inject logs here -->
+                </div>
+                
+                <!-- Scanline overlay for the terminal -->
+                <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,102,0.03)_1px,transparent_1px)] bg-[size:100%_4px] opacity-50 z-10"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="status-root"></div>
+    <div id="terminal-root"></div>
+
+    <script src="js/components.js"></script>
+    <script src="js/brand-effect.js"></script>
+    <script src="js/terminal.js"></script>
+    <script src="js/sys-status.js"></script>
+    <script src="js/boot-loader.js"></script>
+    <script src="js/global-fx.js"></script>
+
+    <!-- LIVE SOC FEED GENERATOR -->
+    <script>
+        const feedContainer = document.getElementById('soc-feed-container');
+        
+        // Attack Data Pools
+        const attackTypes = [
+            { name: "SSH BRUTE FORCE", color: "text-yellow-500", level: "WARN" },
+            { name: "SQL INJECTION", color: "text-exploitRed", level: "CRIT" },
+            { name: "MALWARE DROP", color: "text-exploitRed", level: "CRIT" },
+            { name: "PORT SCAN", color: "text-cyberBlue", level: "INFO" },
+            { name: "XSS PAYLOAD", color: "text-yellow-500", level: "WARN" },
+            { name: "UNAUTH ACCESS", color: "text-exploitRed", level: "CRIT" },
+            { name: "TCP SYN FLOOD", color: "text-yellow-500", level: "WARN" },
+            { name: "RCE ATTEMPT", color: "text-exploitRed", level: "CRIT" }
+        ];
+
+        const ports = [22, 80, 443, 8080, 3306, 21, 3389, 53, 445];
+        
+        const actions = [
+            "<span class='text-termGreen'>[DROPPED]</span>",
+            "<span class='text-termGreen'>[BLOCKED]</span>",
+            "<span class='text-exploitRed bg-exploitRed/20 px-1'>[BYPASSED]</span>",
+            "<span class='text-cyberBlue'>[LOGGED]</span>"
+        ];
+
+        // Random Generators
+        const randItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+        const randIP = () => `${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}`;
+        const getTimestamp = () => {
+            const d = new Date();
+            return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}.${String(d.getMilliseconds()).padStart(3,'0')}`;
+        };
+
+        // Create a log entry
+        function generateLog() {
+            const attack = randItem(attackTypes);
+            const action = (attack.level === "CRIT" && Math.random() > 0.8) ? actions[2] : randItem([actions[0], actions[1], actions[3]]);
+            
+            const div = document.createElement('div');
+            div.className = 'log-entry py-0.5 border-b border-gray-900/50 flex flex-wrap gap-x-2 gap-y-1';
+            
+            div.innerHTML = `
+                <span class="text-gray-600">[${getTimestamp()}]</span>
+                <span class="${attack.color} font-bold">[${attack.level}]</span>
+                <span class="text-gray-300">SRC: <span class="text-gray-400">${randIP()}</span></span>
+                <span class="text-gray-500">--></span>
+                <span class="text-gray-300">DPT: <span class="text-cyberBlue">${randItem(ports)}</span></span>
+                <span class="${attack.color}">${attack.name}</span>
+                <span class="ml-auto">${action}</span>
+            `;
+
+            feedContainer.appendChild(div);
+
+            // Auto-scroll to bottom
+            feedContainer.scrollTop = feedContainer.scrollHeight;
+
+            // Keep DOM light (remove oldest logs after 40 entries)
+            if (feedContainer.children.length > 40) {
+                feedContainer.removeChild(feedContainer.children[2]); // Keep the first two intro lines
+            }
+
+            // Trigger the next log at a random fast interval (Hollywood style: 100ms - 1200ms)
+            const nextInterval = Math.floor(Math.random() * 1100) + 100;
+            setTimeout(generateLog, nextInterval);
+        }
+
+        // Start the feed after a short delay
+        setTimeout(generateLog, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOUTAM // 102 v1.2.1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { bgDark: '#0A0E17', termGreen: '#00FF66', cyberBlue: '#00F0FF', exploitRed: '#FF003C' },
+                    fontFamily: { mono: ['"Share Tech Mono"', '"JetBrains Mono"', 'monospace'], sans: ['"Inter"', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Share+Tech+Mono&family=JetBrains+Mono:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/nexus.css">
+</head>
+<body class="bg-bgDark text-gray-200 font-sans min-h-screen overflow-x-hidden selection:bg-termGreen selection:text-black relative">
+    <!-- INJECTED MODULE ROOTS -->
+    <div id="loader-root"></div>
+    <div class="crt-overlay fixed inset-0 z-50"></div>
+    <canvas id="particle-canvas" class="fixed inset-0 z-0 pointer-events-none"></canvas>
+    <div id="brand-root"></div>
+    <div id="navbar-root"></div>
+
+    <!-- HERO MAIN SECTION -->
+    <main class="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center">
+        <div class="max-w-4xl mx-auto space-y-8">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-termGreen/30 bg-termGreen/5 text-termGreen font-mono text-xs tracking-widest uppercase">
+                <span class="w-1.5 h-1.5 rounded-full bg-termGreen animate-ping"></span>
+                LEARN OFFENSIVE SECURITY &amp; DEFENSE PROTOCOLS
+            </div>
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white uppercase font-mono min-h-[4.5rem] flex items-center justify-center">
+                <span id="cypher-heading" class="glow-blue" data-text="Master the Art of Ethical Hacking">0x00000000000000000</span>
+            </h1>
+            <p class="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+                Practical, Hands-On Cybersecurity Training. Master real-world exploit mitigation, offensive infiltration tactics, and automated network defense.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                <a href="why-cybersec.html" class="w-full sm:w-auto px-8 py-4 rounded-lg font-mono text-sm uppercase tracking-wider font-semibold bg-termGreen text-bgDark hover:bg-termGreen/90 transition-all box-glow-green text-center">
+                    Why Cybersecurity?
+                </a>
+                <a href="why-me.html" class="w-full sm:w-auto px-8 py-4 rounded-lg font-mono text-sm uppercase tracking-wider font-semibold border border-gray-700 hover:border-cyberBlue text-gray-300 hover:text-cyberBlue transition-all text-center">
+                    Why Learn With Me?
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- INJECTED WIDGET ROOTS -->
+    <div id="status-root"></div>
+    <div id="terminal-root"></div>
+
+    <!-- 1. SYNCHRONOUS INJECTOR FIRST -->
+    <script src="js/components.js"></script>
+    <!-- 2. BEHAVIOR SCRIPTS SECOND -->
+    <script src="js/brand-effect.js"></script>
+    <script src="js/terminal.js"></script>
+    <script src="js/sys-status.js"></script>
+    <script src="js/boot-loader.js"></script>
+    <script src="js/global-fx.js"></script>
+    
+</body>
+</html>

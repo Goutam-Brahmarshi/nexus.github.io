@@ -1,0 +1,445 @@
+/* =========================================
+   NEXUS CORE STYLESHEET // GLOBAL THEME
+   ========================================= */
+
+/* 1. CRT & GLASSMORPHISM OVERLAYS */
+.crt-overlay {
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    background-size: 100% 3px, 6px 100%;
+    pointer-events: none;
+}
+
+.optical-lens {
+    background: rgba(10, 14, 23, 0.35);
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
+                inset 0 -2px 4px 0 rgba(0, 240, 255, 0.2),
+                0 15px 35px rgba(0, 0, 0, 0.6);
+    backdrop-filter: brightness(1.2) contrast(1.1);
+    -webkit-backdrop-filter: brightness(1.2) contrast(1.1);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+}
+
+.glass-terminal {
+    background: rgba(10, 14, 23, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* 2. GLOW UTILITIES */
+.glow-blue { text-shadow: 0 0 10px rgba(0, 240, 255, 0.7); }
+.glow-green { text-shadow: 0 0 10px rgba(0, 255, 102, 0.7); }
+.box-glow-blue { box-shadow: 0 0 20px -5px rgba(0, 240, 255, 0.5); }
+.box-glow-green { box-shadow: 0 0 20px -5px rgba(0, 255, 102, 0.5); }
+.box-glow-red { box-shadow: 0 0 20px -5px rgba(255, 0, 60, 0.5); }
+.box-glow-yellow { box-shadow: 0 0 20px -5px rgba(234, 179, 8, 0.5); }
+
+/* 3. TERMINAL SCROLLBAR & BLINKING BLOCK CURSOR */
+.term-scroll::-webkit-scrollbar { width: 4px; }
+.term-scroll::-webkit-scrollbar-track { background: #0A0E17; }
+.term-scroll::-webkit-scrollbar-thumb { background: #00FF66; }
+
+.terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background-color: #00FF66;
+    vertical-align: middle;
+    animation: cursor-blink 1s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* 4. BRAND CONTAINER & SCRAMBLE TEXT UI */
+.brand-container {
+    position: fixed;
+    top: 30px;
+    left: 40px;
+    z-index: 100;
+    user-select: none;
+    pointer-events: none;
+}
+
+.brand-title {
+    font-size: 0.85rem;
+    color: #fff;
+    background: rgba(0,0,0,0.6);
+    padding: 2px 5px;
+    border-left: 2px solid #04D9FF;
+    font-family: monospace;
+    letter-spacing: 1px;
+    opacity: 0.9;
+}
+
+/* 5. NEXUS GLITCH EFFECT */
+.glitch {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #04D9FF;
+    position: relative;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px rgba(4, 217, 255, 0.4);
+    transition: transform 0.05s ease;
+    cursor: pointer;
+    display: inline-block;
+    text-transform: uppercase;
+    pointer-events: auto;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0A0E17;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 #00ffff;
+    clip-path: inset(100% 0 0 0);
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: 2px 0 #ff0055;
+    clip-path: inset(100% 0 0 0);
+}
+
+.is-glitching::before { animation: glitch-anim-1 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+.is-glitching::after { animation: glitch-anim-2 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+
+@keyframes glitch-anim-1 {
+    0%   { clip-path: inset(20% 0 80% 0); transform: translate(-4px, -2px); }
+    20%  { clip-path: inset(60% 0 10% 0); transform: translate(4px, 2px); }
+    40%  { clip-path: inset(40% 0 50% 0); transform: translate(-2px, 4px); }
+    60%  { clip-path: inset(80% 0 5% 0);  transform: translate(4px, -2px); }
+    80%  { clip-path: inset(10% 0 70% 0); transform: translate(-4px, 0); }
+    100% { clip-path: inset(100% 0 0 0);  transform: translate(0); }
+}
+
+@keyframes glitch-anim-2 {
+    0%   { clip-path: inset(15% 0 60% 0); transform: translate(4px, 2px); }
+    20%  { clip-path: inset(80% 0 5% 0);  transform: translate(-4px, -2px); }
+    40%  { clip-path: inset(30% 0 40% 0); transform: translate(4px, -2px); }
+    60%  { clip-path: inset(50% 0 20% 0); transform: translate(-2px, 4px); }
+    80%  { clip-path: inset(5% 0 80% 0);  transform: translate(4px, 0); }
+    100% { clip-path: inset(100% 0 0 0);  transform: translate(0); }
+}
+
+.glitch.is-hovered {
+    transform: scale(1.04) skewX(-3deg);
+    text-shadow: 0 0 8px #fff, -6px 0 0 rgba(0, 255, 255, 0.8), 6px 0 0 rgba(255, 0, 85, 0.8);
+}
+
+.glitch.is-hovered::before {
+    clip-path: var(--clip-before, inset(0 0 0 0));
+    transform: translate(var(--shift-x-before, -10px), var(--shift-y-before, 0px));
+    text-shadow: -12px 0 #00ffff;
+}
+
+.glitch.is-hovered::after {
+    clip-path: var(--clip-after, inset(0 0 0 0));
+    transform: translate(var(--shift-x-after, 10px), var(--shift-y-after, 0px));
+    text-shadow: 12px 0 #ff0055;
+}
+
+/* ========================================================
+   6. MOBILE RESPONSIVE DOCK & UI OVERRIDES (< 640px)
+   ======================================================== */
+@media (max-width: 639px) {
+    /* Horizontal bottom navigation dock */
+    .responsive-dock {
+        right: 50% !important;
+        top: auto !important;
+        bottom: 1rem !important;
+        transform: translateX(50%) !important;
+        flex-direction: row !important;
+        padding: 0.65rem 1.25rem !important;
+        gap: 1.15rem !important;
+        width: max-content;
+        max-width: 95vw;
+        border-radius: 1.5rem !important;
+    }
+
+    /* Automatically add extra bottom space to every page so bottom navbar never hides text */
+    main {
+        padding-bottom: 7.5rem !important;
+    }
+
+    /* Keep top-left brand container compact */
+    .brand-container {
+        top: 15px;
+        left: 18px;
+    }
+
+    .brand-container .glitch {
+        font-size: 1.45rem;
+    }
+
+    /* Full-screen terminal on Android/mobile screens */
+    #term-window {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: none !important;
+        max-height: none !important;
+        border-radius: 0 !important;
+        border: none !important;
+    }
+}
+
+/* ========================================================
+   7. BOOT LOADER & MATRIX PRELOADER UI (RESTORED!)
+   ======================================================== */
+#crypto-preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 100000;
+    overflow: hidden;
+}
+
+#crypto-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-effect {
+    animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+    filter: invert(1);
+}
+
+@keyframes glitch-skew {
+    0% { transform: translate(0) }
+    20% { transform: translate(-10px, 10px); clip-path: inset(10% 0 80% 0); }
+    40% { transform: translate(10px, -10px); clip-path: inset(50% 0 10% 0); }
+    60% { transform: translate(-5px, 5px); clip-path: inset(80% 0 5% 0); }
+    80% { transform: translate(5px, -5px); clip-path: inset(0 0 100% 0); }
+    100% { transform: translate(0) }
+}
+
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 99999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(rgba(4, 217, 255, 0.1) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(4, 217, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    transition: opacity 0.8s ease-out;
+}
+
+.loader-container {
+    width: 400px;
+    position: relative;
+}
+
+.loader-log {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    height: 20px;
+    color: #04D9FF;
+    text-shadow: 0 0 5px #04D9FF;
+    white-space: nowrap;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.progress-bar-shell {
+    width: 100%;
+    height: 6px;
+    background: #111;
+    border: 1px solid #333;
+    position: relative;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: #04D9FF;
+    box-shadow: 0 0 15px #04D9FF;
+    transition: width 0.1s linear;
+}
+
+.secure-boot {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    font-size: 0.7rem;
+    color: #555;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.secure-boot::before {
+    content: '$';
+    font-size: 0.8rem;
+}
+
+/* ========================================================
+   8. SYSTEM STATUS WIDGET ANIMATION
+   ======================================================== */
+#sys-widget.active {
+    display: block;
+    animation: slide-up-fade 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slide-up-fade {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================================
+   9. CYBER-HUD TACTICAL BUTTON // SYSTEM STATUS
+   ======================================================== */
+.cyber-hud-btn-wrapper {
+    position: fixed;
+    z-index: 50;
+    /* Resting Cyber Blue Glow */
+    filter: drop-shadow(0 0 5px rgba(0, 240, 255, 0.4));
+    transition: filter 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Slight Intensity Glow on Hover */
+.cyber-hud-btn-wrapper:hover {
+    filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.8));
+    transform: scale(1.02);
+}
+
+.cyber-hud-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(10, 14, 23, 0.9);
+    color: #00F0FF;
+    font-family: 'Share Tech Mono', 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 8px 16px 8px 18px;
+    
+    /* Chamfered Octagonal Cut Corners */
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    position: relative;
+    backdrop-filter: blur(4px);
+}
+
+/* 1px Cyber Blue Border mapped to the Cut Shape */
+.cyber-hud-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #00F0FF;
+    padding: 1.5px;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    
+    /* 1. Use standard gradient syntax to satisfy the linter */
+    -webkit-mask: linear-gradient(#fff 0, #fff 100%) content-box, linear-gradient(#fff 0, #fff 100%);
+    
+    /* 2. Add the standard 'mask' property for modern browser support */
+    mask: linear-gradient(#fff 0, #fff 100%) content-box, linear-gradient(#fff 0, #fff 100%);
+    
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* Embedded Tactical LED */
+.cyber-hud-btn .status-led {
+    width: 6px;
+    height: 6px;
+    background-color: #00F0FF;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #00F0FF;
+    animation: hud-led-pulse 1.5s infinite alternate;
+}
+
+@keyframes hud-led-pulse {
+    0% { opacity: 0.4; box-shadow: 0 0 2px #00F0FF; }
+    100% { opacity: 1; box-shadow: 0 0 8px #00F0FF; }
+}
+
+/* ========================================================
+   10. NEXUS CYBER BLUE TERMINAL // MATCHED DARK THEME
+   ======================================================== */
+.nexus-terminal-window {
+  background-color: #0A0E17 !important;
+  color: #00F0FF !important;
+  border: 1px solid rgba(0, 240, 255, 0.35) !important;
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.15), 0 20px 50px rgba(0, 0, 0, 0.8) !important;
+  font-family: 'Share Tech Mono', 'JetBrains Mono', monospace;
+}
+
+.nexus-terminal-header {
+  background-color: #06090F !important;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.25) !important;
+  color: #00F0FF !important;
+  user-select: none;
+}
+
+.nexus-terminal-input-bar {
+  background-color: #06090F !important;
+  border-top: 1px solid rgba(0, 240, 255, 0.25) !important;
+  color: #00F0FF !important;
+}
+
+/* Cyber Blue Box Cursor */
+.nexus-box-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.15em;
+  background-color: #00F0FF;
+  box-shadow: 0 0 8px #00F0FF;
+  vertical-align: -0.18em;
+  margin-left: 3px;
+  animation: nexus-cursor-blink 1s step-end infinite;
+}
+
+@keyframes nexus-cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Cyber Blue Terminal Scrollbar */
+.nexus-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.nexus-scroll::-webkit-scrollbar-track {
+  background: #0A0E17;
+}
+.nexus-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.3);
+  border-radius: 4px;
+}
+.nexus-scroll::-webkit-scrollbar-thumb:hover {
+  background: #00F0FF;
+  box-shadow: 0 0 8px #00F0FF;
+}
