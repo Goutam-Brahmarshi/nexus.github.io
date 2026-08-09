@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="[PERSONAL_INFO: Best in-class cybersecurity portfolio and offensive security courses.]">
+    <meta property="og:title" content="GOUTAM // THE NEXUS MINDSET">
+    <meta property="og:image" content="/assets/[PERSONAL_INFO: real_image.jpg]">
+    <!-- CSP added as per audit constraint -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
+    
+    <title>GOUTAM // THE NEXUS</title>
+    <!-- Vite injected module style -->
+    <link rel="stylesheet" href="/src/css/nexus.css">
+</head>
+<body class="bg-bgDark text-gray-200 min-h-screen custom-cursor">
+    
+    <!-- HACK TO ENTER: Interactive Boot (Replaces 4s mandatory wait time) -->
+    <div id="hack-to-enter" class="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center font-mono">
+        <label for="boot-cmd" class="text-termGreen mb-4 sr-only">Enter boot sequence:</label>
+        <div class="text-termGreen mb-4">SYSTEM AWAITING COMMAND. TYPE <span class="font-bold text-white">'init'</span> TO CONTINUE.</div>
+        <input type="text" id="boot-cmd" class="bg-transparent border border-termGreen/50 p-2 text-white focus:outline-none" autocomplete="off" autofocus aria-label="Boot loader terminal">
+        <button id="skip-btn" class="mt-8 text-xs text-gray-500 hover:text-white" aria-label="Skip introductory bootloader">[- SKIP PROTOCOL -]</button>
+    </div>
+
+    <!-- MAIN APP WRAPPER -->
+    <main class="hidden opacity-0 transition-opacity duration-1000" id="main-content">
+        <!-- SEMANTIC SEO H1 (Screen-reader & Crawlers parse this properly) -->
+        <h1 class="sr-only">[PERSONAL_INFO: Full Name] Cybersecurity Operations</h1>
+        
+        <!-- Scramble text layer uses Aria-Hidden so screen readers don't read junk -->
+        <h2 aria-hidden="true" class="text-6xl text-cyberBlue font-bold" id="scramble-hero">Initializing...</h2>
+
+        <!-- Interactive Embedded Mini-CTF -->
+        <section aria-labelledby="mini-ctf" class="p-8 border border-gray-800 rounded mt-12 bg-black/60 max-w-xl mx-auto">
+            <h3 id="mini-ctf" class="text-termGreen font-mono font-bold border-b border-termGreen pb-2 mb-4">Mini-CTF Payload [Task #01]</h3>
+            <p class="text-gray-400 font-sans mb-4">Decode this ciphertext to verify competence:</p>
+            <div class="bg-bgDark p-3 rounded text-red-500 font-mono tracking-widest text-center select-all mb-4">UTBOUkxQTEFDRUhPTERFUjpCT2F1dGlmdWxfTWluZF0=</div>
+            
+            <div class="flex gap-2">
+                <input type="text" id="ctf-flag" placeholder="Submit flag format: [FLAG]" class="w-full bg-black border border-gray-600 px-3 text-white">
+                <button id="ctf-submit" class="bg-cyberBlue/20 text-cyberBlue border border-cyberBlue px-4 hover:bg-cyberBlue hover:text-black">SUBMIT</button>
+            </div>
+            <div id="ctf-feedback" class="mt-4 font-mono text-sm hidden" aria-live="polite"></div>
+        </section>
+
+        <!-- Social Proof / Reviews Block (Business requirement) -->
+        <section class="mt-20">
+            <h3 class="text-2xl text-white font-mono mb-6 text-center">COMMUNICATIONS & INTEL</h3>
+            <div class="flex justify-center gap-6 flex-wrap">
+                <article class="bg-gray-900 border-l-4 border-cyberBlue p-4 max-w-md">
+                    <p class="italic text-gray-300">"[PERSONAL_INFO: Review quote detailing how the student passed an exam due to your class.]"</p>
+                    <span class="text-xs text-cyberBlue uppercase mt-4 block">- [PERSONAL_INFO: Reviewer Name]</span>
+                </article>
+            </div>
+        </section>
+
+    </main>
+    
+    <script type="module">
+        import { App } from '/src/js/AppManager.js';
+
+        // Boot Loader Logic (Business UI fix + skip feature)
+        const bootLoader = document.getElementById('hack-to-enter');
+        const bootInput = document.getElementById('boot-cmd');
+        const mainContent = document.getElementById('main-content');
+
+        const initBoot = () => {
+            bootLoader.style.display = 'none';
+            mainContent.classList.remove('hidden');
+            setTimeout(() => mainContent.classList.remove('opacity-0'), 50);
+            sessionStorage.setItem('nexus_booted', 'true');
+        };
+
+        if(sessionStorage.getItem('nexus_booted') === 'true') { initBoot(); }
+        else {
+            bootInput.addEventListener('keydown', (e) => {
+                if(e.key === 'Enter' && e.target.value.toLowerCase().trim() === 'init') {
+                    App.audio.play('boot');
+                    initBoot();
+                }
+            });
+            document.getElementById('skip-btn').addEventListener('click', initBoot);
+        }
+
+        // Mini CTF logic
+        document.getElementById('ctf-submit').addEventListener('click', () => {
+            const input = document.getElementById('ctf-flag').value.trim();
+            const feedback = document.getElementById('ctf-feedback');
+            feedback.classList.remove('hidden');
+            // Mock answer checking
+            if(input === "[PERSONAL_INFO:CTF_ANSWER]") {
+                feedback.className = "mt-4 font-mono text-sm text-termGreen font-bold";
+                feedback.textContent = "> PAYLOAD ACCEPTED. ACCESS CLEARED.";
+            } else {
+                feedback.className = "mt-4 font-mono text-sm text-exploitRed font-bold";
+                feedback.textContent = "> ERROR: SIGNATURE MISMATCH.";
+            }
+        });
+    </script>
+</body>
+</html>

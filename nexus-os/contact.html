@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Secure communications and enrollment for [PERSONAL_INFO: Full Name].">
+    <!-- Security meta tag requested -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
+    
+    <title>GOUTAM // TRANSMISSION PROTOCOL</title>
+</head>
+<body class="bg-bgDark text-gray-200 custom-cursor">
+    
+    <!-- HUD Layer -->
+    <canvas id="particle-canvas" class="fixed inset-0 z-0 pointer-events-none"></canvas>
+
+    <main class="relative z-10 w-full max-w-4xl mx-auto px-4 pt-20 pb-20 min-h-screen flex flex-col justify-center">
+        
+        <h1 class="text-3xl text-termGreen font-mono mb-8 border-b border-gray-800 pb-2">> SECURE UPLINK ESTABLISHED</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            
+            <section class="bg-black/60 border border-cyberBlue p-8 shadow-[0_0_20px_rgba(0,240,255,0.1)]">
+                <!-- FORM FROM PREVIOUS AUDIT -->
+                <form id="tactical-form" action="https://[PERSONAL_INFO: insert-formspree-id]" method="POST">
+                    <p class="text-gray-400 font-sans text-sm border-l border-cyberBlue pl-2 italic mb-6">
+                        "Submit this intelligence payload. I will reply via [PERSONAL_INFO: preferred method (e.g. Email)] within 24 hours."
+                    </p>
+                    
+                    <label class="block font-mono text-[10px] text-gray-400 mb-2">Operator_Handle</label>
+                    <input type="text" name="name" required class="w-full bg-bgDark border border-gray-600 text-white p-3 mb-4 focus-visible:outline-termGreen">
+                    
+                    <label class="block font-mono text-[10px] text-gray-400 mb-2">Return_Vector (Email)</label>
+                    <input type="email" name="_replyto" required class="w-full bg-bgDark border border-gray-600 text-white p-3 mb-4 focus-visible:outline-termGreen">
+                    
+                    <label class="block font-mono text-[10px] text-gray-400 mb-2">Mission_Objective</label>
+                    <select id="objective" name="objective" required class="w-full bg-bgDark border border-gray-600 text-white p-3 mb-4 focus-visible:outline-termGreen">
+                        <option value="training">General Enrollment & Mentorship</option>
+                    </select>
+                    
+                    <label class="block font-mono text-[10px] text-gray-400 mb-2">Payload Details (Enter Promo code here)</label>
+                    <textarea name="message" required rows="5" class="w-full bg-bgDark border border-gray-600 text-white p-3 mb-4 focus-visible:outline-termGreen"></textarea>
+                    
+                    <!-- Honeypot -->
+                    <input type="text" name="_gotcha" style="display:none">
+                    
+                    <button type="submit" class="w-full py-3 bg-termGreen font-bold font-mono text-black hover:bg-white transition-colors">TRANSMIT</button>
+                </form>
+            </section>
+            
+            <aside class="space-y-6">
+                <!-- XSS & Security Issue fix: Noopener noreferrer on links -->
+                <div class="p-6 bg-gray-900 border border-gray-700">
+                    <h2 class="text-white font-mono text-sm mb-4">ALT COMM CHANNELS</h2>
+                    <div class="space-y-2 font-mono text-sm">
+                        <a href="https://github.com/[PERSONAL_INFO: Username]" target="_blank" rel="noopener noreferrer" class="block text-gray-400 hover:text-cyberBlue">> Github Data-Lake</a>
+                        <a href="https://linkedin.com/in/[PERSONAL_INFO: Username]" target="_blank" rel="noopener noreferrer" class="block text-gray-400 hover:text-cyberBlue">> Corporate Ledger (LinkedIn)</a>
+                        <a href="https://x.com/[PERSONAL_INFO: Username]" target="_blank" rel="noopener noreferrer" class="block text-gray-400 hover:text-cyberBlue">> Realtime OPSEC (X/Twitter)</a>
+                    </div>
+                </div>
+            </aside>
+            
+        </div>
+    </main>
+
+    <!-- Context auto-loading -->
+    <script type="module" src="/src/js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const courseRef = new URLSearchParams(window.location.search).get('course');
+            if (courseRef) {
+                const selector = document.getElementById('objective');
+                selector.add(new Option(`Enrolling in: ${courseRef}`, courseRef, true, true));
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+/* NEXUS.CSS */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono:wght@800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+ * FIX: A custom terminal block cursor, per audit request.
+ * Applied globally. Note we keep native cursor fallback in forms so text-selection works.
+ */
+.custom-cursor, .custom-cursor * {
+  cursor: url('data:image/svg+xml;utf8,<svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="8" height="14" fill="%2300FF66"/></svg>'), auto;
+}
+input, textarea, button, a {
+  cursor: pointer;
+}
+
+/* Base Variables */
+:root {
+  --term-green: #00FF66;
+  --cyber-blue: #00F0FF;
+  --exploit-red: #FF003C;
+}
+
+/* 
+ * ACCESSIBILITY CONTRAST OVERRIDE
+ * Ensures that previously very faint grays map to highly legible contrast limits for WCAG AA
+ */
+.text-gray-600 {
+  color: #9CA3AF !important; /* Force brighter contrast mapped to gray-400 */
+}
+
+.text-gray-500 {
+  color: #D1D5DB !important; /* Map mapped to gray-300 */
+}
+
+/* 
+ * FIX: Accessibility Outline
+ * Rather than disabling focus styles for inputs, apply standard neon glows for focus/visible states 
+ */
+input:focus-visible, button:focus-visible, a:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--term-green);
+    outline-offset: 4px;
+    box-shadow: 0 0 12px var(--term-green);
+}
+
+/* ========================================================
+   PREFERS-REDUCED-MOTION HANDLER (System setting toggle)
+   ======================================================== */
+@media (prefers-reduced-motion: reduce) {
+  /* Suppress continuous animation fields and background blobs */
+  .ambient-blob-1, 
+  .ambient-blob-2,
+  .crt-overlay,
+  #particle-canvas,
+  .scan-overlay,
+  .glitch {
+    display: none !important;
+    animation: none !important;
+    transition: none !important;
+    background-image: none !important;
+    filter: none !important;
+  }
+  
+  /* Suppress parallax sliding rules mapped in global */
+  .reveal-group, .timeline-item, .log-entry {
+    transform: none !important;
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  /* Prevent text-scrambler CSS class jitter if implemented pure CSS */
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
